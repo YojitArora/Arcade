@@ -1,4 +1,4 @@
-# TicTacToe
+# Arcade
 
 A small shared arcade built with Flask and vanilla HTML/CSS/JavaScript. It includes TicTacToe and Minesweeper under one consistent interface.
 
@@ -68,6 +68,21 @@ Each frontend renders server state and sends requested moves via API. Scores are
 - `POST /api/minesweeper/new` — start a new Minesweeper round
 - `POST /api/minesweeper/reveal` — reveal a cell with `{ "cell": 0 }`
 - `POST /api/minesweeper/flag` — toggle a cell flag with `{ "cell": 0 }`
+
+## TicTacToe Gameplay
+
+- **Objective**: Get three of your marks (X or O) in a row horizontally, vertically, or diagonally
+- **Modes**:
+  - **Player vs Player**: Two human players take turns
+  - **Player vs Computer**: Play against an AI opponent at three difficulty levels
+- **Difficulty Levels**:
+  - **Easy**: Computer makes random valid moves
+  - **Medium**: Computer tries to win or block your winning moves
+  - **Hard**: Computer uses Minimax algorithm for optimal play (unbeatable)
+- **Gameplay**: Click an empty cell to place your mark; the game validates moves on the server
+- **Win**: First player to get three marks in a row wins
+- **Draw**: If all 9 cells are filled with no winner, the game ends in a draw
+- **Scoring**: Session tracks wins and losses for both player and computer
 
 ## Minesweeper Gameplay
 
