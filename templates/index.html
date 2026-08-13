@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>TicTacToe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="TicTacToe home">Arcade</a>
+      <nav class="game-switcher" aria-label="Choose a game">
+        <a class="active" href="/">TicTacToe</a>
+        <a href="/minesweeper">Minesweeper</a>
+      </nav>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch color theme"><span aria-hidden="true">☼</span></button>
+    </header>
+
+    <section class="game-layout">
+      <aside class="control-panel panel">
+        <p class="eyebrow">GAME SETUP</p>
+        <h1>Make your move.</h1>
+        <div class="setting-group">
+          <span class="setting-label">PLAY MODE</span>
+          <div class="segmented" role="group" aria-label="Game mode">
+            <button class="choice active" data-mode="computer" type="button">vs Computer</button>
+            <button class="choice" data-mode="player" type="button">vs Player</button>
+          </div>
+        </div>
+        <div id="difficulty-group" class="setting-group">
+          <span class="setting-label">DIFFICULTY</span>
+          <div class="difficulty-options" role="group" aria-label="Difficulty">
+            <button class="difficulty" data-difficulty="easy" type="button">Easy</button>
+            <button class="difficulty active" data-difficulty="medium" type="button">Medium</button>
+            <button class="difficulty" data-difficulty="hard" type="button">Hard</button>
+          </div>
+        </div>
+        <div class="setting-group">
+          <span class="setting-label">PLAY AS</span>
+          <div class="mark-options" role="group" aria-label="Choose your mark">
+            <button class="mark-choice active" data-mark="X" type="button"><b>X</b><small>First</small></button>
+            <button class="mark-choice" data-mark="O" type="button"><b>O</b><small>Second</small></button>
+          </div>
+        </div>
+        <button id="new-game" class="button primary" type="button">Start New Game <span>→</span></button>
+      </aside>
+
+      <section class="play-area">
+        <div class="status-card panel" aria-live="polite">
+          <span id="turn-dot" class="turn-dot"></span>
+          <p id="status-message">Your turn — make it count.</p>
+        </div>
+        <div id="board" class="board" role="grid" aria-label="Tic Tac Toe board"></div>
+        <div class="game-actions">
+          <button id="restart-game" class="button secondary" type="button">↻ &nbsp;Restart Round</button>
+          <button id="new-game-mobile" class="button ghost" type="button">New setup</button>
+        </div>
+      </section>
+
+      <aside class="score-panel panel">
+        <div class="score-heading"><div><p class="eyebrow">SESSION SCORE</p><h2>Scoreboard</h2></div><button id="reset-scores" class="text-button" type="button">Reset</button></div>
+        <div class="scores">
+          <div class="score-row x-score"><span class="score-symbol">X</span><span>Player X</span><strong id="score-x">0</strong></div>
+          <div class="score-row o-score"><span class="score-symbol">O</span><span>Player O</span><strong id="score-o">0</strong></div>
+          <div class="score-row draw-score"><span class="score-symbol">–</span><span>Draws</span><strong id="score-draws">0</strong></div>
+        </div>
+        <div class="tip"><p><b>Hard mode</b><br>Uses an unbeatable Minimax opponent.</p></div>
+      </aside>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="alert"></div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

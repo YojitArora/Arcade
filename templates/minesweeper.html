@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#000000">
+  <title>Minesweeper · Arcade</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Arcade home">Arcade</a>
+      <nav class="game-switcher" aria-label="Choose a game">
+        <a href="/">TicTacToe</a>
+        <a class="active" href="/minesweeper">Minesweeper</a>
+      </nav>
+      <button id="theme-toggle" class="icon-button" type="button" aria-label="Switch color theme"><span aria-hidden="true">☼</span></button>
+    </header>
+
+    <section class="mines-layout">
+      <aside class="mines-info panel">
+        <p class="eyebrow">ARCADE GAME</p>
+        <h1>Minesweeper</h1>
+        <p class="mines-copy">Clear the field without uncovering a mine. Right-click, or use Flag mode, to mark suspected mines.</p>
+        <button id="mines-new-game" class="button primary" type="button">New Round <span>→</span></button>
+        <section class="mines-scorecard" aria-labelledby="scorecard-heading">
+          <div class="mines-scorecard-heading">
+            <h2 id="scorecard-heading">Scorecard</h2>
+            <span id="score-board-size">9x9</span>
+          </div>
+          <dl class="run-stats">
+            <div><dt>Time</dt><dd id="run-time">0:00</dd></div>
+            <div><dt>Moves</dt><dd id="run-moves">0</dd></div>
+            <div><dt>Flagged</dt><dd id="run-flags">0</dd></div>
+            <div><dt>Status</dt><dd id="run-status">Playing</dd></div>
+          </dl>
+          <form id="save-score-form" class="save-score-form" hidden>
+            <label for="player-name">Save this run</label>
+            <div>
+              <input id="player-name" name="name" type="text" maxlength="24" autocomplete="name" placeholder="Player name" required>
+              <button class="button secondary" type="submit">Save Score</button>
+            </div>
+          </form>
+          <div class="high-score-heading"><h3>High scores</h3><span>Top 10</span></div>
+          <ol id="high-scores" class="high-scores" aria-live="polite">
+            <li class="empty-score">Loading scores…</li>
+          </ol>
+        </section>
+      </aside>
+      <section class="mines-play-area">
+        <div class="mines-status panel" aria-live="polite">
+          <p id="mines-message">Clear the field.</p>
+          <span>Flags: <b id="flags-left">10</b></span>
+        </div>
+        <div id="mines-board" class="mines-board" role="grid" aria-label="Minesweeper board"></div>
+        <button id="flag-mode" class="button secondary mines-flag-button" type="button" aria-pressed="false">Flag mode: off</button>
+      </section>
+    </section>
+  </main>
+  <div id="toast" class="toast" role="alert"></div>
+  <script src="{{ url_for('static', filename='js/minesweeper.js') }}"></script>
+</body>
+</html>
