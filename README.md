@@ -4,12 +4,25 @@ A small shared arcade built with Flask and vanilla HTML/CSS/JavaScript. It inclu
 
 ## Features
 
+### TicTacToe
 - Player vs Player and Player vs Computer modes
 - Easy (random), Medium (win/block strategy), and Hard (optimal Minimax) computer opponents
 - Choose whether the human player is X or O
 - Server-validated moves, wins, draws, and score tracking
 - Session scoreboard, winning-cell animation, responsive layout, and light/dark themes
-- A responsive game switcher and a server-validated 9×9 Minesweeper game
+
+### Minesweeper
+- Classic 9×9 grid with configurable difficulty
+- Reveal cells and flag suspected mines
+- Server-validated board logic and win/loss detection
+- Score tracking with game results history
+- Recursive cell clearing (opens blank areas automatically)
+- Mine counter and timer
+
+### General
+- Responsive game switcher
+- Light/dark theme support
+- Session-based scoreboard
 
 ## Run locally
 
@@ -36,9 +49,13 @@ A small shared arcade built with Flask and vanilla HTML/CSS/JavaScript. It inclu
 
 ## Project layout
 
-`app.py` provides the Flask pages and JSON APIs. `game.py` owns TicTacToe's rules, validation, score keeping, and Minimax implementation; `minesweeper.py` owns the Minesweeper board rules. Each frontend renders server state and sends requested moves.
+`app.py` provides the Flask pages and JSON APIs for both games. 
 
-Scores are intentionally held in memory for the current running server session. Restarting the server resets them.
+**TicTacToe**: `game.py` owns the game's rules, validation, score keeping, and Minimax implementation for AI opponents.
+
+**Minesweeper**: `minesweeper.py` handles the board generation, mine placement, cell revealing logic, flagging, and win/loss detection.
+
+Each frontend renders server state and sends requested moves via API. Scores are intentionally held in memory for the current running server session. Restarting the server resets them.
 
 ## API
 
@@ -51,3 +68,19 @@ Scores are intentionally held in memory for the current running server session. 
 - `POST /api/minesweeper/new` — start a new Minesweeper round
 - `POST /api/minesweeper/reveal` — reveal a cell with `{ "cell": 0 }`
 - `POST /api/minesweeper/flag` — toggle a cell flag with `{ "cell": 0 }`
+
+## Minesweeper Gameplay
+
+- **Objective**: Reveal all non-mine cells without hitting a mine
+- **Reveal**: Click a cell to uncover it. If it's safe, it shows the number of adjacent mines (or blank if zero)
+- **Flag**: Right-click or use the flag button to mark suspected mines
+- **Cascade**: Revealing a cell with no adjacent mines automatically reveals all adjacent safe cells
+- **Win**: Reveal all safe cells (mines stay flagged)
+- **Lose**: Reveal a cell containing a mine
+
+## Technologies
+
+- **Backend**: Python with Flask
+- **Frontend**: Vanilla HTML, CSS, and JavaScript
+- **Storage**: JSON file for persistent score tracking (optional)
+- **Board Size**: 9×9 grid with mines and numbers
